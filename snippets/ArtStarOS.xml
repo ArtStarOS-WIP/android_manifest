@@ -3,7 +3,7 @@
 
   <remote name="Q"
           fetch="https://github.com/ArtStarOS-WIP"
-          revision="refs/heads/queenslave" />
+          revision="refs/heads/Q" />
 
   <remote name="gitlab/hentaiOS"
           fetch="https://gitlab.com/hentaiOS"
