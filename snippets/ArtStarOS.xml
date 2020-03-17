@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote name="Q"
+          fetch="https://github.com/ArtStarOS-WIP"
+          revision="refs/heads/queenslave" />
+
+  <remote name="gitlab/hentaiOS"
+          fetch="https://gitlab.com/hentaiOS"
+          revision="refs/heads/queenslave" />
+
+  <!-- Build -->
+  <project path="build/make" name="platform_build" groups="pdk" remote="Q" >
+    <copyfile src="core/root.mk" dest="Makefile" />
+    <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+    <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+    <linkfile src="core" dest="build/core" />
+    <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+    <linkfile src="target" dest="build/target" />
+    <linkfile src="tools" dest="build/tools" />
+  </project>
+  <project path="build/soong" name="platform_build_soong" groups="pdk,tradefed" remote="Q" >
+    <linkfile src="root.bp" dest="Android.bp" />
+    <linkfile src="bootstrap.bash" dest="bootstrap.bash" />
+  </project>
+  <project path="bionic" name="platform_bionic" groups="pdk" remote="Q" />
+  <project path="bootable/recovery" name="platform_bootable_recovery" groups="pdk" remote="Q" />
+  <project path="build/blueprint" name="platform_build_blueprint" groups="pdk-cw-fs,pdk-fs" remote="Q" />
+  <project path="device/qcom/sepolicy" name="platform_device_qcom_sepolicy" groups="pdk" remote="Q" />
+  <project path="external/tinycompress" name="platform_external_tinycompress" groups="pdk" remote="Q" />
+  <project path="frameworks/av" name="platform_frameworks_av" groups="pdk-cw-fs,pdk-fs" remote="Q" />
+  <project path="frameworks/base" name="platform_frameworks_base" groups="pdk-cw-fs,pdk-fs" remote="Q" />
+  <project path="frameworks/native" name="platform_frameworks_native" groups="pdk-cw-fs,pdk-fs" remote="Q" />
+  <project path="hardware/interfaces" name="platform_hardware_interfaces" groups="pdk" remote="Q" />
+  <project path="hardware/libhardware" name="platform_hardware_libhardware" groups="pdk" remote="Q" />
+  <project path="hardware/qcom-caf/common" name="platform_hardware_qcom-caf_common" groups="qcom,pdk-qcom" remote="Q" >
+    <!-- add guard for AOSP hardware/qcom dir -->
+    <linkfile src="os_pickup_aosp.mk" dest="hardware/qcom/Android.mk" />
+    <!-- for AOSP sdm845 and sm8150, we override os_pickup.mk -->
+    <linkfile src="os_pickup.mk" dest="hardware/qcom/sdm845/Android.mk" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom/sm8150/Android.mk" />
+    <!-- add guards for CAF repositories -->
+    <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/msm8998/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8998/Android.mk" />
+    <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/sdm845/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sdm845/Android.mk" />
+    <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/sm8150/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sm8150/Android.mk" />
+    <linkfile src="os_pickup.bp" dest="vendor/nxp/opensource/pn5xx/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="vendor/nxp/opensource/pn5xx/Android.mk" />
+    <linkfile src="os_pickup.bp" dest="vendor/nxp/opensource/sn100x/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="vendor/nxp/opensource/sn100x/Android.mk" />
+  </project>
+  <project path="hardware/qcom/sdm845/data/ipacfg-mgr" name="platform_hardware_qcom_sdm845_data_ipacfg-mgr" groups="pdk" remote="Q" >
+    <linkfile src="os_pickup.mk" dest="hardware/qcom/sdm845/Android.mk" />
+    <linkfile src="os_pickup.bp" dest="hardware/qcom/sdm845/Android.bp" />
+  </project>
+  <project path="hardware/libhardware_legacy" name="platform_hardware_libhardware_legacy" groups="pdk" remote="Q" />
+  <project path="hardware/qcom-caf/sm8150/audio" name="platform_hardware_qcom-caf_sm8150_audio" groups="pdk" remote="Q" />
+  <project path="hardware/qcom-caf/sm8150/display" name="platform_hardware_qcom-caf_sm8150_display" groups="pdk" remote="Q" />
+  <project path="hardware/qcom-caf/sm8150/media" name="platform_hardware_qcom-caf_sm8150_media" groups="pdk" remote="Q" />
+  <project path="hardware/qcom/sdm845/display" name="platform_hardware_qcom_sdm845_display" groups="pdk" remote="Q" />
+  <project path="hardware/qcom/sdm845/media" name="platform_hardware_qcom_sdm845_media" groups="pdk" remote="Q" />
+  <project path="packages/apps/Nfc" name="platform_packages_apps_Nfc" groups="pdk" remote="Q" />
+  <project path="packages/apps/Settings" name="platform_packages_apps_Settings" groups="pdk" remote="Q" />
+  <project path="packages/providers/MediaProvider" name="platform_packages_providers_MediaProvider" groups="pdk" remote="Q" />
+  <project path="packages/services/Telephony" name="platform_packages_services_Telephony" groups="pdk" remote="Q" />
+  <project path="system/core" name="platform_system_core" groups="pdk" remote="Q" />
+  <project path="system/vold" name="platform_system_vold" groups="pdk" remote="Q" />
+  <project path="vendor/codeaurora/telephony" name="platform_vendor_codeaurora_telephony" groups="vendor" remote="Q" />
+  <project path="vendor/gms" name="platform_vendor_gms" groups="vendor" remote="gitlab/hentaiOS" />
+  <project path="vendor/artstar" name="platform_vendor_artstar" groups="vendor" remote="Q" />
+  <project path="vendor/nxp/opensource/commonsys/external/libnfc-nci" name="platform_vendor_nxp_opensource_external_libnfc-nci" remote="Q" />
+  <project path="vendor/nxp/opensource/commonsys/frameworks" name="platform_vendor_nxp_opensource_frameworks" remote="Q" />
+  <project path="vendor/nxp/opensource/commonsys/packages/apps/Nfc" name="platform_vendor_nxp_opensource_packages_apps_Nfc" remote="Q" />
+  <project path="vendor/nxp/opensource/interfaces/nfc" name="platform_vendor_nxp_interfaces_opensource_nfc" remote="Q" />
+  <project path="vendor/nxp/opensource/pn5xx/halimpl" name="platform_vendor_nxp_opensource_pn5xx_halimpl" remote="Q" />
+  <project path="vendor/nxp/opensource/pn5xx/hidlimpl" name="platform_vendor_nxp_opensource_pn5xx_hidlimpl" remote="Q" />
+  <project path="vendor/nxp/opensource/sn100x/halimpl" name="platform_vendor_nxp_opensource_sn100x_halimpl" remote="Q" />
+  <project path="vendor/nxp/opensource/sn100x/hidlimpl" name="platform_vendor_nxp_opensource_sn100x_hidlimpl" remote="Q" />
+  <project path="vendor/qcom/opensource/audio" name="platform_vendor_qcom_opensource_audio" groups="vendor" remote="Q" />
+  <project path="vendor/qcom/opensource/data-ipa-cfg-mgr" name="platform_vendor_qcom_opensource_data-ipa-cfg-mgr" groups="vendor" remote="Q" />
+  <project path="vendor/qcom/opensource/dataservices" name="platform_vendor_qcom_opensource_dataservices" groups="vendor" remote="Q" />
+  <project path="vendor/qcom/opensource/interfaces" name="platform_vendor_qcom_opensource_interfaces" groups="vendor" remote="Q" />
+  <project path="vendor/qcom/opensource/power" name="platform_vendor_qcom_opensource_power" groups="vendor" remote="Q" />
+  <project path="vendor/qcom/opensource/thermal-engine" name="platform_vendor_qcom_opensource_thermal-engine" remote="Q" />
+
+</manifest>
